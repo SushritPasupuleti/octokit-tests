@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -31,12 +31,25 @@ const useStyles = makeStyles((theme) => ({
 export default function Search() {
   const classes = useStyles();
 
+  const [userName, setuserName] = useState("");
+  const [repoName, setrepoName] = useState("");
+
   return (
     <Paper component="form" className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Query"
+        placeholder="User"
         inputProps={{ 'aria-label': 'query' }}
+        value={userName}
+        onChange={e => setuserName(e.target.value)}
+      />
+      <Divider className={classes.divider} orientation="vertical" />
+      <InputBase
+        className={classes.input}
+        placeholder="Repo"
+        inputProps={{ 'aria-label': 'query2' }}
+        value={repoName}
+        onChange={e => setrepoName(e.target.value)}
       />
       <IconButton type="submit" className={classes.iconButton} aria-label="search">
         <SearchIcon />

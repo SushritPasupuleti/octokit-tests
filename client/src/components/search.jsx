@@ -47,7 +47,7 @@ export default function Search() {
 			})
 			.then(({ data }) => {
 				console.log(data);
-        setrepoData(data)
+				setrepoData(data);
 			});
 	};
 
@@ -78,7 +78,17 @@ export default function Search() {
 					<SearchIcon />
 				</IconButton>
 			</Paper>
-			<RepoCard name={repoData?.name}/>
+			<RepoCard
+				name={repoData?.name}
+				forks={repoData?.forks_count}
+				owner={repoData?.owner?.login}
+				languages={repoData?.language}
+        network={repoData?.network_count}
+        open_issues={repoData?.open_issues_count}
+        stars={repoData?.stargazers_count}
+        subscribers={repoData?.subscribers_count}
+        watchers={repoData?.watchers_count}
+			/>
 		</React.Fragment>
 	);
 }

@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function RepoCard({name, forks, languages, network, open_issues, isPrivate, stars, subscribers, watchers}) {
+export default function RepoCard({name, owner, forks, languages, network, open_issues, isPrivate, stars, subscribers, watchers}) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -35,15 +35,20 @@ export default function RepoCard({name, forks, languages, network, open_issues, 
           {name}
         </Typography>
         <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
+          {owner}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          adjective
+          {languages}
         </Typography>
         <Typography variant="body2" component="p">
-          well meaning and kindly.
           <br />
-          {'"a benevolent smile"'}
+          Stars: {stars}
+          <br />
+          Forks: {forks}
+          <br />
+          Subscribers: {subscribers}
+          <br />
+          Open Isssues: {open_issues}
         </Typography>
       </CardContent>
       <CardActions>

@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
+import RepoCard from './RepoCard';
 const { Octokit } = require('@octokit/rest');
 
 const useStyles = makeStyles((theme) => ({
@@ -35,44 +36,49 @@ export default function Search() {
 
 	const [userName, setuserName] = useState('');
 	const [repoName, setrepoName] = useState('');
+	const [repoData, setrepoData] = useState('');
 
 	const fetchRepoDetails = () => {
 		octokit.repos
 			.get({
 				owner: userName,
 				// type: 'public',
-        repo: repoName
+				repo: repoName,
 			})
 			.then(({ data }) => {
 				console.log(data);
+        setrepoData(data)
 			});
 	};
 
 	return (
-		<Paper component="form" className={classes.root}>
-			<InputBase
-				className={classes.input}
-				placeholder="User"
-				inputProps={{ 'aria-label': 'query' }}
-				value={userName}
-				onChange={(e) => setuserName(e.target.value)}
-			/>
-			<Divider className={classes.divider} orientation="vertical" />
-			<InputBase
-				className={classes.input}
-				placeholder="Repo"
-				inputProps={{ 'aria-label': 'query2' }}
-				value={repoName}
-				onChange={(e) => setrepoName(e.target.value)}
-			/>
-			<IconButton
-				type="button"
-				className={classes.iconButton}
-				aria-label="search"
-				onClick={() => fetchRepoDetails()}
-			>
-				<SearchIcon />
-			</IconButton>
-		</Paper>
+		<React.Fragment>
+			<Paper className={classes.root}>
+				<InputBase
+					className={classes.input}
+					placeholder="User"
+					inputProps={{ 'aria-label': 'query' }}
+					value={userName}
+					onChange={(e) => setuserName(e.target.value)}
+				/>
+				<Divider className={classes.divider} orientation="vertical" />
+				<InputBase
+					className={classes.input}
+					placeholder="Repo"
+					inputProps={{ 'aria-label': 'query2' }}
+					value={repoName}
+					onChange={(e) => setrepoName(e.target.value)}
+				/>
+				<IconButton
+					type="button"
+					className={classes.iconButton}
+					aria-label="search"
+					onClick={() => fetchRepoDetails()}
+				>
+					<SearchIcon />
+				</IconButton>
+			</Paper>
+			<RepoCard name={repoData?.name}/>
+		</React.Fragment>
 	);
 }

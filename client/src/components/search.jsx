@@ -83,11 +83,11 @@ export default function Search() {
 				forks={repoData?.forks_count}
 				owner={repoData?.owner?.login}
 				languages={repoData?.language}
-        network={repoData?.network_count}
-        open_issues={repoData?.open_issues_count}
-        stars={repoData?.stargazers_count}
-        subscribers={repoData?.subscribers_count}
-        watchers={repoData?.watchers_count}
+				network={repoData?.network_count}
+				open_issues={repoData?.open_issues_count}
+				stars={repoData?.stargazers_count}
+				subscribers={repoData?.subscribers_count}
+				watchers={repoData?.watchers_count}
 			/>
 		</React.Fragment>
 	);
